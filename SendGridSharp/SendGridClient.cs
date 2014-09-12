@@ -46,18 +46,17 @@ namespace SendGridSharp
                 { new StringContent(_credentials.UserName), "api_user" },
                 { new StringContent(_credentials.Password), "api_key" },
                 { new StringContent(JsonConvert.SerializeObject(message.Headers)), "headers" },
-                { new StringContent(message.ReplyToList.Count != 0 ? message.ReplyToList[0].Address : ""), "replyto" },
-                { new StringContent(message.From.Address), "from" },
-                { new StringContent(message.From.DisplayName), "fromname" },
+                { new StringContent(message.ReplyTo.Count != 0 ? message.ReplyTo[0] : ""), "replyto" },
+                { new StringContent(message.From), "from" },
                 { new StringContent(message.Subject), "subject" },
-                { new StringContent(message.Body), "text" },
+                { new StringContent(message.Text), "text" },
+                { new StringContent(message.Html), "html" },
                 { new StringContent(message.Header.ToString()), "x-smtpapi" }
             };
 
             foreach (var to in message.To)
             {
-                content.Add(new StringContent(to.Address), "to[]");
-                content.Add(new StringContent(to.DisplayName), "toname[]");
+                content.Add(new StringContent(to), "to[]");
             }
 
             return content;
