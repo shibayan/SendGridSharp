@@ -1,4 +1,7 @@
-﻿namespace SendGridSharp
+﻿using System;
+using System.IO;
+
+namespace SendGridSharp
 {
     public static class SendGridMessageExtensions
     {
@@ -70,6 +73,31 @@
         public static void UseTemplate(this SendGridMessage message, string html)
         {
             message.Header.UseTemplate(html);
+        }
+
+        public static void AddAttachment(this SendGridMessage message, string path)
+        {
+            if (path == null)
+            {
+                throw new ArgumentNullException("path");
+            }
+
+            AddAttachment(message, path, Path.GetFileName(path));
+        }
+
+        public static void AddAttachment(this SendGridMessage message, string path, string fileName)
+        {
+            if (path == null)
+            {
+                throw new ArgumentNullException("path");
+            }
+
+            if (fileName == null)
+            {
+                throw new ArgumentNullException("fileName");
+            }
+
+            message.Files.Add(fileName, File.OpenRead(path));
         }
     }
 }

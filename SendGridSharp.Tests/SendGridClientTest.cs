@@ -48,5 +48,42 @@ namespace SendGridSharp.Tests
 
             await client.SendAsync(message);
         }
+
+        [TestMethod]
+        public void Attachment()
+        {
+            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+
+            var message = new SendGridMessage();
+
+            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
+            message.From = ConfigurationManager.AppSettings["MailFrom"];
+
+            message.Subject = "file attachment";
+            message.Text = "file attachment test";
+
+            message.AddAttachment(ConfigurationManager.AppSettings["AttachmentImage"]);
+
+            client.Send(message);
+        }
+
+        [TestMethod]
+        public void EmbedImage()
+        {
+            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+
+            var message = new SendGridMessage();
+
+            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
+            message.From = ConfigurationManager.AppSettings["MailFrom"];
+
+            message.Subject = "file attachment";
+            message.Html = "file attachment test<br /><img src=\"cid:hogehoge\" /><br />inline image";
+
+            message.AddAttachment(ConfigurationManager.AppSettings["AttachmentImage"], "maki.jpg");
+            message.Content.Add("maki.jpg", "hogehoge");
+
+            client.Send(message);
+        }
     }
 }
