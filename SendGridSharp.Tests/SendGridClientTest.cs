@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -47,6 +48,26 @@ namespace SendGridSharp.Tests
             message.Html = "<p>-name- さん</p>";
 
             await client.SendAsync(message);
+        }
+
+        [TestMethod]
+        public void Schedule()
+        {
+            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+
+            var message = new SendGridMessage();
+
+            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
+            message.From = ConfigurationManager.AppSettings["MailFrom"];
+
+            message.Header.AddSubstitution("-name-", "抱かれたい男 No.1");
+            message.Header.AddSendAt(DateTimeOffset.Now.AddSeconds(30));
+
+            message.Subject = "-name- さんへ";
+            message.Text = "-name- さん";
+            message.Html = "<p>-name- さん</p>";
+
+            client.Send(message);
         }
 
         [TestMethod]

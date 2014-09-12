@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Newtonsoft.Json;
 
@@ -7,12 +9,14 @@ namespace SendGridSharp
     public class SmtpHeader
     {
         private readonly List<string> _to = new List<string>();
+        private readonly List<DateTimeOffset> _sendAt = new List<DateTimeOffset>();
         private readonly List<string> _categories = new List<string>();
         private readonly Dictionary<string, IList<string>> _substitutions = new Dictionary<string, IList<string>>();
         private readonly Dictionary<string, string> _uniqueArgs = new Dictionary<string, string>();
         private readonly Dictionary<string, string> _sections = new Dictionary<string, string>();
         private readonly Dictionary<string, object> _filters = new Dictionary<string, object>();
 
+        private static readonly DateTime _unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
         {
             StringEscapeHandling = StringEscapeHandling.EscapeNonAscii,
@@ -27,6 +31,16 @@ namespace SendGridSharp
         public void AddTo(IList<string> addresses)
         {
             _to.AddRange(addresses);
+        }
+
+        public void AddSendAt(params DateTimeOffset[] dateTimes)
+        {
+            _sendAt.AddRange(dateTimes);
+        }
+
+        public void AddSendAt(IList<DateTimeOffset> dateTimes)
+        {
+            _sendAt.AddRange(dateTimes);
         }
 
         public void AddSubstitution(string tag, params string[] substitutions)
@@ -104,6 +118,18 @@ namespace SendGridSharp
             if (_filters.Count != 0)
             {
                 data.Add("filters", _filters);
+            }
+
+            if (_sendAt.Count != 0)
+            {
+                if (_sendAt.Count == 1)
+                {
+                    data.Add("send_at", (long)(_sendAt[0].UtcDateTime - _unixEpoch).TotalSeconds);
+                }
+                else
+                {
+                    data.Add("send_each_at", _sendAt.Select(p => (long)(p.UtcDateTime - _unixEpoch).TotalSeconds).ToArray());
+                }
             }
 
             if (data.Count == 0)
