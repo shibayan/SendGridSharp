@@ -41,8 +41,10 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendGridClient.cs" />
+    <Compile Include="SendGridException.cs" />
     <Compile Include="SendGridMessage.cs" />
     <Compile Include="SendGridMessageExtensions.cs" />
     <Compile Include="SmtpHeader.cs" />

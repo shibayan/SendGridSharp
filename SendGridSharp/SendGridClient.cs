@@ -25,7 +25,14 @@ namespace SendGridSharp
 
             var response = client.PostAsync(Endpoint, content).Result;
 
-            response.EnsureSuccessStatusCode();
+            var responseContent = response.Content.ReadAsStringAsync().Result;
+
+            var result = JsonConvert.DeserializeObject<GenericResult>(responseContent);
+
+            if (!result.IsSuccess)
+            {
+                throw new SendGridException(result.Errors[0]);
+            }
         }
 
         public async Task SendAsync(SendGridMessage message)
@@ -36,7 +43,14 @@ namespace SendGridSharp
 
             var response = await client.PostAsync(Endpoint, content);
 
-            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            var result = JsonConvert.DeserializeObject<GenericResult>(responseContent);
+
+            if (!result.IsSuccess)
+            {
+                throw new SendGridException(result.Message);
+            }
         }
 
         private MultipartFormDataContent GetContent(SendGridMessage message)
