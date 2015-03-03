@@ -61,6 +61,8 @@ namespace SendGridSharp
 
         public string From { get; set; }
 
+        public string FromName { get; set; }
+
         public string ReplyTo { get; set; }
 
         public string Subject { get; set; }

@@ -65,6 +65,11 @@ namespace SendGridSharp
                 { new StringContent(message.Header.ToString()), "x-smtpapi" }
             };
 
+            if (message.FromName != null)
+            {
+                content.Add(new StringContent(message.FromName), "fromname");
+            }
+
             if (message.ReplyTo != null)
             {
                 content.Add(new StringContent(message.ReplyTo), "replyto");
