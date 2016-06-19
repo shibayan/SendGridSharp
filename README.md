@@ -6,7 +6,10 @@ Yet Another SendGrid Client for C#
 ## Usage
 
 ```
-var client = new SendGridClient(new NetworkCredential("API_USER", "API_KEY"));
+// Use API Key
+var client = new SendGridClient("API_KEY");
+// use SendGrid credential
+//var client = new SendGridClient(new NetworkCredential("USERNAME", "PASSWORD"));
 
 var message = new SendGridMessage();
 
