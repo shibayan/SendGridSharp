@@ -14,7 +14,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public void Send()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var message = new SendGridMessage();
 
@@ -34,7 +34,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public async Task SendAsync()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var message = new SendGridMessage();
 
@@ -54,7 +54,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public void Schedule()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var message = new SendGridMessage();
 
@@ -74,7 +74,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public void ScheduleMulti()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var sendAt = DateTimeOffset.Now.AddMinutes(15);
 
@@ -101,7 +101,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public void Attachment()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var message = new SendGridMessage();
 
@@ -119,7 +119,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public void EmbedImage()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var message = new SendGridMessage();
 
@@ -138,7 +138,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public void TemplateEngine()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var message = new SendGridMessage();
 
@@ -159,7 +159,7 @@ namespace SendGridSharp.Tests
         [TestMethod]
         public void OpenTrack()
         {
-            var client = new SendGridClient(new NetworkCredential(ConfigurationManager.AppSettings["ApiUser"], ConfigurationManager.AppSettings["ApiKey"]));
+            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
 
             var message = new SendGridMessage();
 

@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
@@ -13,15 +15,21 @@ namespace SendGridSharp
             _credentials = credentials;
         }
 
+        public SendGridClient(string apiKey)
+        {
+            _apiKey = apiKey;
+        }
+
         private const string Endpoint = "https://api.sendgrid.com/api/mail.send.json";
 
+        private readonly string _apiKey;
         private readonly NetworkCredential _credentials;
 
         public void Send(SendGridMessage message)
         {
             var content = GetContent(message);
 
-            var client = new HttpClient();
+            var client = new HttpClient(new WebApiHandler(_apiKey));
 
             var response = client.PostAsync(Endpoint, content).Result;
 
@@ -39,7 +47,7 @@ namespace SendGridSharp
         {
             var content = GetContent(message);
 
-            var client = new HttpClient();
+            var client = new HttpClient(new WebApiHandler(_apiKey));
 
             var response = await client.PostAsync(Endpoint, content);
 
@@ -57,13 +65,17 @@ namespace SendGridSharp
         {
             var content = new MultipartFormDataContent
             {
-                { new StringContent(_credentials.UserName), "api_user" },
-                { new StringContent(_credentials.Password), "api_key" },
                 { new StringContent(JsonConvert.SerializeObject(message.Headers)), "headers" },
                 { new StringContent(message.From), "from" },
                 { new StringContent(message.Subject), "subject" },
                 { new StringContent(message.Header.ToString()), "x-smtpapi" }
             };
+
+            if (_credentials != null)
+            {
+                content.Add(new StringContent(_credentials.UserName), "api_user");
+                content.Add(new StringContent(_credentials.Password), "api_key");
+            }
 
             if (message.FromName != null)
             {
@@ -116,6 +128,27 @@ namespace SendGridSharp
             }
 
             return content;
+        }
+
+        internal class WebApiHandler : DelegatingHandler
+        {
+            internal WebApiHandler(string apiKey)
+                : base(new HttpClientHandler())
+            {
+                _apiKey = apiKey;
+            }
+
+            private readonly string _apiKey;
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                if (_apiKey != null)
+                {
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+                }
+
+                return base.SendAsync(request, cancellationToken);
+            }
         }
     }
 }
