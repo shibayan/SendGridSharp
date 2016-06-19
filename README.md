@@ -5,7 +5,7 @@ Yet Another SendGrid Client for C#
 
 ## Usage
 
-```
+```csharp
 // Use API Key
 var client = new SendGridClient("API_KEY");
 // use SendGrid credential
