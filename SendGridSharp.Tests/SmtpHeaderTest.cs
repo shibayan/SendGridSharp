@@ -73,7 +73,7 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.Equal("{\"category\":\"foo\"}", result);
+            Assert.Equal("{\"category\":[\"foo\"]}", result);
         }
 
         [Fact]
