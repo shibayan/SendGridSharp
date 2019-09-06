@@ -92,12 +92,12 @@ namespace SendGridSharp
 
             if (_to.Count != 0)
             {
-                data.Add("to", _to.Count == 1 ? _to[0] : (object)_to);
+                data.Add("to", _to);
             }
 
             if (_categories.Count != 0)
             {
-                data.Add("category", _categories.Count == 1 ? _categories[0] : (object)_categories);
+                data.Add("category", _categories);
             }
 
             if (_substitutions.Count != 0)
