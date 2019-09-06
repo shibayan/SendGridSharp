@@ -11,10 +11,7 @@ namespace SendGridSharp
         public string[] Errors { get; set; }
 
         [JsonIgnore]
-        public bool IsSuccess
-        {
-            get { return Message == SuccessMessage; }
-        }
+        public bool IsSuccess => Message == SuccessMessage;
 
         private const string SuccessMessage = "success";
     }
