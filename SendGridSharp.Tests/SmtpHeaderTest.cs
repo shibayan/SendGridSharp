@@ -7,7 +7,21 @@ namespace SendGridSharp.Tests
     public class SmtpHeaderTest
     {
         [Fact]
-        public void TestAddTo()
+        public void TestAddTo_Single()
+        {
+            var header = new SmtpHeader();
+
+            // Arrange
+            header.AddTo(new List<string> { "joe@example.com" });
+
+            // Actual
+            var result = header.ToString();
+
+            Assert.Equal("{\"to\":[\"joe@example.com\"]}", result);
+        }
+
+        [Fact]
+        public void TestAddTo_Multiple()
         {
             var header = new SmtpHeader();
 
