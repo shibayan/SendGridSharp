@@ -16,48 +16,19 @@ namespace SendGridSharp
             To.AddRange(to);
         }
 
-        private readonly List<string> _to = new List<string>();
-        private readonly List<string> _cc = new List<string>();
-        private readonly List<string> _bcc = new List<string>();
-        private readonly SmtpHeader _header = new SmtpHeader();
-        private readonly Dictionary<string, string> _headers = new Dictionary<string, string>();
-        private readonly Dictionary<string, Stream> _files = new Dictionary<string, Stream>();
-        private readonly Dictionary<string, string> _content = new Dictionary<string, string>();
+        public List<string> To { get; } = new List<string>();
 
-        public List<string> To
-        {
-            get { return _to; }
-        }
+        public List<string> Cc { get; } = new List<string>();
 
-        public List<string> Cc
-        {
-            get { return _cc; }
-        }
+        public List<string> Bcc { get; } = new List<string>();
 
-        public List<string> Bcc
-        {
-            get { return _bcc; }
-        }
+        public SmtpHeader Header { get; } = new SmtpHeader();
 
-        public SmtpHeader Header
-        {
-            get { return _header; }
-        }
+        public Dictionary<string, string> Headers { get; } = new Dictionary<string, string>();
 
-        public Dictionary<string, string> Headers
-        {
-            get { return _headers; }
-        }
+        public Dictionary<string, Stream> Files { get; } = new Dictionary<string, Stream>();
 
-        public Dictionary<string, Stream> Files
-        {
-            get { return _files; }
-        }
-
-        public Dictionary<string, string> Content
-        {
-            get { return _content; }
-        }
+        public Dictionary<string, string> Content { get; } = new Dictionary<string, string>();
 
         public string From { get; set; }
 

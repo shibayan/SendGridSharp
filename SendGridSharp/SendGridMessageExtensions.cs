@@ -79,7 +79,7 @@ namespace SendGridSharp
         {
             if (path == null)
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             }
 
             AddAttachment(message, path, Path.GetFileName(path));
@@ -89,12 +89,12 @@ namespace SendGridSharp
         {
             if (path == null)
             {
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             }
 
             if (fileName == null)
             {
-                throw new ArgumentNullException("fileName");
+                throw new ArgumentNullException(nameof(fileName));
             }
 
             message.Files.Add(fileName, File.OpenRead(path));

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace SendGridSharp.Tests
 {
-    [TestClass]
     public class SmtpHeaderTest
     {
-        [TestMethod]
+        [Fact]
         public void TestAddTo()
         {
             var header = new SmtpHeader();
@@ -18,10 +17,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"to\":[\"joe@example.com\",\"jane@example.com\"]}", result);
+            Assert.Equal("{\"to\":[\"joe@example.com\",\"jane@example.com\"]}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAddSubstitution()
         {
             var header = new SmtpHeader();
@@ -32,10 +31,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"sub\":{\"foo\":[\"bar\",\"raz\"]}}", result);
+            Assert.Equal("{\"sub\":{\"foo\":[\"bar\",\"raz\"]}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAddSection()
         {
             var header = new SmtpHeader();
@@ -46,10 +45,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"section\":{\"foo\":\"bar\"}}", result);
+            Assert.Equal("{\"section\":{\"foo\":\"bar\"}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAddUniqueArg()
         {
             var header = new SmtpHeader();
@@ -60,10 +59,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"unique_args\":{\"foo\":\"bar\"}}", result);
+            Assert.Equal("{\"unique_args\":{\"foo\":\"bar\"}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAddCategory()
         {
             var header = new SmtpHeader();
@@ -74,10 +73,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"category\":\"foo\"}", result);
+            Assert.Equal("{\"category\":\"foo\"}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAddCategories()
         {
             var header = new SmtpHeader();
@@ -88,10 +87,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"category\":[\"dogs\",\"animals\",\"pets\",\"mammals\"]}", result);
+            Assert.Equal("{\"category\":[\"dogs\",\"animals\",\"pets\",\"mammals\"]}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestBccFilter()
         {
             var header = new SmtpHeader();
@@ -102,10 +101,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"bcc\":{\"settings\":{\"enable\":1,\"email\":\"foo@example.com\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"bcc\":{\"settings\":{\"enable\":1,\"email\":\"foo@example.com\"}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestBypassListManagementFilter()
         {
             var header = new SmtpHeader();
@@ -116,10 +115,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"bypass_list_management\":{\"settings\":{\"enable\":1}}}}", result);
+            Assert.Equal("{\"filters\":{\"bypass_list_management\":{\"settings\":{\"enable\":1}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestClickTrackFilter()
         {
             var header = new SmtpHeader();
@@ -130,10 +129,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"clicktrack\":{\"settings\":{\"enable\":1}}}}", result);
+            Assert.Equal("{\"filters\":{\"clicktrack\":{\"settings\":{\"enable\":1}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDkimFilter()
         {
             var header = new SmtpHeader();
@@ -144,10 +143,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"dkim\":{\"settings\":{\"domain\":\"example.com\",\"use_from\":false}}}}", result);
+            Assert.Equal("{\"filters\":{\"dkim\":{\"settings\":{\"domain\":\"example.com\",\"use_from\":false}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDomainKeysFilter()
         {
             var header = new SmtpHeader();
@@ -158,10 +157,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"domainkeys\":{\"settings\":{\"enable\":1,\"domain\":\"example.com\",\"sender\":true}}}}", result);
+            Assert.Equal("{\"filters\":{\"domainkeys\":{\"settings\":{\"enable\":1,\"domain\":\"example.com\",\"sender\":true}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestFooterFilter()
         {
             var header = new SmtpHeader();
@@ -172,10 +171,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"footer\":{\"settings\":{\"enable\":1,\"text/html\":\"<p>html</p>\",\"text/plain\":\"text\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"footer\":{\"settings\":{\"enable\":1,\"text/html\":\"<p>html</p>\",\"text/plain\":\"text\"}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestForwardSpamFilter()
         {
             var header = new SmtpHeader();
@@ -186,10 +185,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"forwardspam\":{\"settings\":{\"enable\":1,\"email\":\"you@example.com\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"forwardspam\":{\"settings\":{\"enable\":1,\"email\":\"you@example.com\"}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGoogleAnalyticsFilter()
         {
             var header = new SmtpHeader();
@@ -200,10 +199,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"ganalytics\":{\"settings\":{\"enable\":1,\"utm_source\":\"source\",\"utm_medium\":\"medium\",\"utm_term\":\"term\",\"utm_content\":\"content\",\"utm_campaign\":\"campaign\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"ganalytics\":{\"settings\":{\"enable\":1,\"utm_source\":\"source\",\"utm_medium\":\"medium\",\"utm_term\":\"term\",\"utm_content\":\"content\",\"utm_campaign\":\"campaign\"}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGravatarFilter()
         {
             var header = new SmtpHeader();
@@ -214,10 +213,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"gravatar\":{\"settings\":{\"enable\":1}}}}", result);
+            Assert.Equal("{\"filters\":{\"gravatar\":{\"settings\":{\"enable\":1}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestOpenTrackFilter()
         {
             var header = new SmtpHeader();
@@ -228,10 +227,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"opentrack\":{\"settings\":{\"enable\":1}}}}", result);
+            Assert.Equal("{\"filters\":{\"opentrack\":{\"settings\":{\"enable\":1}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestSpamCheckFilter()
         {
             var header = new SmtpHeader();
@@ -242,10 +241,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"spamcheck\":{\"settings\":{\"enable\":1,\"maxscore\":3.5,\"url\":\"http://example.com/\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"spamcheck\":{\"settings\":{\"enable\":1,\"maxscore\":3.5,\"url\":\"http://example.com/\"}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestSubscriptionTrackFilter()
         {
             var header = new SmtpHeader();
@@ -256,10 +255,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"subscriptiontrack\":{\"settings\":{\"enable\":1,\"text/html\":\"<p>html</p>\",\"text/plain\":\"text\",\"replace\":\"replace\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"subscriptiontrack\":{\"settings\":{\"enable\":1,\"text/html\":\"<p>html</p>\",\"text/plain\":\"text\",\"replace\":\"replace\"}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestTemplateEngineFilter()
         {
             var header = new SmtpHeader();
@@ -270,10 +269,10 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"templates\":{\"settings\":{\"enable\":1,\"template_id\":\"5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"templates\":{\"settings\":{\"enable\":1,\"template_id\":\"5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f\"}}}}", result);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestTemplateFilter()
         {
             var header = new SmtpHeader();
@@ -284,7 +283,7 @@ namespace SendGridSharp.Tests
             // Actual
             var result = header.ToString();
 
-            Assert.AreEqual("{\"filters\":{\"template\":{\"settings\":{\"enable\":1,\"text/html\":\"<% body %>\"}}}}", result);
+            Assert.Equal("{\"filters\":{\"template\":{\"settings\":{\"enable\":1,\"text/html\":\"<% body %>\"}}}}", result);
         }
     }
 }

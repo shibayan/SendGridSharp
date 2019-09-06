@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Configuration;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace SendGridSharp.Tests
 {
-    [TestClass]
     public class SendGridClientTest
     {
-        [TestMethod]
+        [Fact]
         public void Send()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var message = new SendGridMessage();
 
-            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-            message.From = ConfigurationManager.AppSettings["MailFrom"];
+            message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+            message.From = Environment.GetEnvironmentVariable("MailFrom");
 
             message.Header.AddSubstitution("-name-", "抱かれたい男 No.1");
             message.UseFooter("html", "text");
@@ -31,15 +28,15 @@ namespace SendGridSharp.Tests
             client.Send(message);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task SendAsync()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var message = new SendGridMessage();
 
-            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-            message.From = ConfigurationManager.AppSettings["MailFrom"];
+            message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+            message.From = Environment.GetEnvironmentVariable("MailFrom");
 
             message.Header.AddSubstitution("-name-", "抱かれたい男 No.1");
             message.UseFooter("html", "text");
@@ -51,15 +48,15 @@ namespace SendGridSharp.Tests
             await client.SendAsync(message);
         }
 
-        [TestMethod]
+        [Fact]
         public void Schedule()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var message = new SendGridMessage();
 
-            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-            message.From = ConfigurationManager.AppSettings["MailFrom"];
+            message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+            message.From = Environment.GetEnvironmentVariable("MailFrom");
 
             message.Header.AddSubstitution("-name-", "抱かれたい男 No.1");
             message.Header.AddSendAt(DateTimeOffset.Now.AddSeconds(30));
@@ -71,10 +68,10 @@ namespace SendGridSharp.Tests
             client.Send(message);
         }
 
-        [TestMethod]
+        [Fact]
         public void ScheduleMulti()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var sendAt = DateTimeOffset.Now.AddMinutes(15);
 
@@ -82,8 +79,8 @@ namespace SendGridSharp.Tests
             {
                 var message = new SendGridMessage();
 
-                message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-                message.From = ConfigurationManager.AppSettings["MailFrom"];
+                message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+                message.From = Environment.GetEnvironmentVariable("MailFrom");
 
                 message.Header.AddSubstitution("-name-", "抱かれたい男 No.1");
                 message.Header.AddSendAt(sendAt);
@@ -98,52 +95,52 @@ namespace SendGridSharp.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void Attachment()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var message = new SendGridMessage();
 
-            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-            message.From = ConfigurationManager.AppSettings["MailFrom"];
+            message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+            message.From = Environment.GetEnvironmentVariable("MailFrom");
 
             message.Subject = "file attachment";
             message.Text = "file attachment test";
 
-            message.AddAttachment(ConfigurationManager.AppSettings["AttachmentImage"]);
+            message.AddAttachment(Environment.GetEnvironmentVariable("AttachmentImage"));
 
             client.Send(message);
         }
 
-        [TestMethod]
+        [Fact]
         public void EmbedImage()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var message = new SendGridMessage();
 
-            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-            message.From = ConfigurationManager.AppSettings["MailFrom"];
+            message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+            message.From = Environment.GetEnvironmentVariable("MailFrom");
 
             message.Subject = "file attachment";
             message.Html = "file attachment test<br /><img src=\"cid:hogehoge\" /><br />inline image";
 
-            message.AddAttachment(ConfigurationManager.AppSettings["AttachmentImage"], "maki.jpg");
+            message.AddAttachment(Environment.GetEnvironmentVariable("AttachmentImage"), "maki.jpg");
             message.Content.Add("maki.jpg", "hogehoge");
 
             client.Send(message);
         }
 
-        [TestMethod]
+        [Fact]
         public void TemplateEngine()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var message = new SendGridMessage();
 
-            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-            message.From = ConfigurationManager.AppSettings["MailFrom"];
+            message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+            message.From = Environment.GetEnvironmentVariable("MailFrom");
 
             message.Subject = " ";
             message.Text = " ";
@@ -156,15 +153,15 @@ namespace SendGridSharp.Tests
             client.Send(message);
         }
 
-        [TestMethod]
+        [Fact]
         public void OpenTrack()
         {
-            var client = new SendGridClient(ConfigurationManager.AppSettings["ApiKey"]);
+            var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var message = new SendGridMessage();
 
-            message.To.Add(ConfigurationManager.AppSettings["MailTo"]);
-            message.From = ConfigurationManager.AppSettings["MailFrom"];
+            message.To.Add(Environment.GetEnvironmentVariable("MailTo"));
+            message.From = Environment.GetEnvironmentVariable("MailFrom");
 
             message.Header.AddSubstitution("-name-", "抱かれたい男 No.1");
             message.UseFooter("html", "text");
