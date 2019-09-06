@@ -1,7 +1,7 @@
 SendGridSharp
 =============
 
-Yet Another SendGrid Client for C#
+Simplify SendGrid REST / SMTP API Client for C#
 
 ## Usage
 
@@ -20,7 +20,7 @@ message.Header.AddSubstitution("-name-", "customer");
 
 message.Subject = "Dear -name- ";
 message.Html = "<p>html message</p>";
-message
+message.Text = "text message";
 
 client.Send(message);
 ```
