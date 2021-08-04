@@ -1,7 +1,26 @@
-SendGridSharp
-=============
+# SendGridSharp
 
-Simplify SendGrid REST / SMTP API Client for C#
+![Build](https://github.com/shibayan/SendGridSharp/workflows/Build/badge.svg)
+[![License](https://img.shields.io/github/license/shibayan/SendGridSharp)](https://github.com/shibayan/SendGridSharp/blob/master/LICENSE)
+[![Downloads](http://img.shields.io/nuget/dt/SendGridSharp.svg?style=flat)](https://www.nuget.org/packages/SendGridSharp/)
+
+Simplify SendGrid REST / SMTP API Client for C# / .NET Standard 2.0
+
+## NuGet Package
+
+Package Name | Target Framework | NuGet
+---|---|---
+SendGridSharp | .NET Standard 2.0 | [![NuGet](https://img.shields.io/nuget/v/SendGridSharp)](https://www.nuget.org/packages/SendGridSharp/)
+
+## Install
+
+```
+Install-Package SendGridSharp
+```
+
+```
+dotnet add package SendGridSharp
+```
 
 ## Usage
 
@@ -24,3 +43,7 @@ message.Text = "text message";
 
 client.Send(message);
 ```
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/shibayan/SendGridSharp/blob/master/LICENSE)

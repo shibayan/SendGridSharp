@@ -9,6 +9,7 @@ namespace SendGridSharp.Tests
     public class SendGridClientTest
     {
         [Fact]
+        [Trait("E2E", "true")]
         public void Send()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
@@ -29,6 +30,7 @@ namespace SendGridSharp.Tests
         }
 
         [Fact]
+        [Trait("E2E", "true")]
         public async Task SendAsync()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
@@ -49,6 +51,7 @@ namespace SendGridSharp.Tests
         }
 
         [Fact]
+        [Trait("E2E", "true")]
         public void Schedule()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
@@ -69,13 +72,14 @@ namespace SendGridSharp.Tests
         }
 
         [Fact]
+        [Trait("E2E", "true")]
         public void ScheduleMulti()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
 
             var sendAt = DateTimeOffset.Now.AddMinutes(15);
 
-            for (int i = 0; i < 5; i++)
+            for (var i = 0; i < 5; i++)
             {
                 var message = new SendGridMessage();
 
@@ -96,6 +100,7 @@ namespace SendGridSharp.Tests
         }
 
         [Fact]
+        [Trait("E2E", "true")]
         public void Attachment()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
@@ -114,6 +119,7 @@ namespace SendGridSharp.Tests
         }
 
         [Fact]
+        [Trait("E2E", "true")]
         public void EmbedImage()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
@@ -133,6 +139,7 @@ namespace SendGridSharp.Tests
         }
 
         [Fact]
+        [Trait("E2E", "true")]
         public void TemplateEngine()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
@@ -154,6 +161,7 @@ namespace SendGridSharp.Tests
         }
 
         [Fact]
+        [Trait("E2E", "true")]
         public void OpenTrack()
         {
             var client = new SendGridClient(Environment.GetEnvironmentVariable("ApiKey"));
