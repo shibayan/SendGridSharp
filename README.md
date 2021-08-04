@@ -2,9 +2,9 @@
 
 ![Build](https://github.com/shibayan/SendGridSharp/workflows/Build/badge.svg)
 [![License](https://img.shields.io/github/license/shibayan/SendGridSharp)](https://github.com/shibayan/SendGridSharp/blob/master/LICENSE)
-[![Downloads](http://img.shields.io/nuget/dt/SendGridSharp.svg?style=flat)](https://www.nuget.org/packages/SendGridSharp/)
+[![Downloads](https://img.shields.io/nuget/dt/SendGridSharp)](https://www.nuget.org/packages/SendGridSharp/)
 
-Simplify SendGrid REST / SMTP API Client for C# / .NET Standard 2.0
+Simplify SendGrid REST / SMTP API Client for C# / .NET Standard
 
 ## NuGet Package
 
