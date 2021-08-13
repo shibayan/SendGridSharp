@@ -27,20 +27,7 @@ namespace SendGridSharp
 
         public void Send(SendGridMessage message)
         {
-            var content = GetContent(message);
-
-            var client = new HttpClient(new WebApiHandler(_apiKey));
-
-            var response = client.PostAsync(Endpoint, content).Result;
-
-            var responseContent = response.Content.ReadAsStringAsync().Result;
-
-            var result = JsonConvert.DeserializeObject<GenericResult>(responseContent);
-
-            if (!result.IsSuccess)
-            {
-                throw new SendGridException(result.Errors[0]);
-            }
+            SendAsync(message).GetAwaiter().GetResult();
         }
 
         public async Task SendAsync(SendGridMessage message)
@@ -49,9 +36,9 @@ namespace SendGridSharp
 
             var client = new HttpClient(new WebApiHandler(_apiKey));
 
-            var response = await client.PostAsync(Endpoint, content);
+            var response = await client.PostAsync(Endpoint, content).ConfigureAwait(false);
 
-            var responseContent = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             var result = JsonConvert.DeserializeObject<GenericResult>(responseContent);
 
