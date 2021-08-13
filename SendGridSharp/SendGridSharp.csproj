@@ -6,8 +6,7 @@
 
   <PropertyGroup>
     <Authors>shibayan</Authors>
-    <Company>shibayan</Company>
-    <Description>Simplify SendGrid REST / SMTP API Client for C# / .NET Standard</Description>
+    <Description>Simplify SendGrid SMTP / REST v2 API Client for C# / .NET Standard</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>https://github.com/shibayan/SendGridSharp/releases</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -16,7 +16,6 @@ namespace SendGridSharp
         private readonly Dictionary<string, string> _sections = new Dictionary<string, string>();
         private readonly Dictionary<string, object> _filters = new Dictionary<string, object>();
 
-        private static readonly DateTime _unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
         {
             StringEscapeHandling = StringEscapeHandling.EscapeNonAscii,
@@ -124,11 +123,11 @@ namespace SendGridSharp
             {
                 if (_sendAt.Count == 1)
                 {
-                    data.Add("send_at", (long)(_sendAt[0].UtcDateTime - _unixEpoch).TotalSeconds);
+                    data.Add("send_at", _sendAt[0].ToUnixTimeSeconds());
                 }
                 else
                 {
-                    data.Add("send_each_at", _sendAt.Select(p => (long)(p.UtcDateTime - _unixEpoch).TotalSeconds).ToArray());
+                    data.Add("send_each_at", _sendAt.Select(x => x.ToUnixTimeSeconds()).ToArray());
                 }
             }
 
